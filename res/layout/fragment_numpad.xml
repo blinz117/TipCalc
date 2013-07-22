@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calculator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <TableRow    	
+        android:layout_height="wrap_content"  
+	    android:layout_width="match_parent"
+	    style="?android:attr/buttonBarStyle"
+	    android:background="#aaaaaa">
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="#dddddd"
+            android:id="@+id/button1"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num1" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="#dddddd"
+            android:id="@+id/button2"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num2" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="#dddddd"
+            android:id="@+id/button3"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num3"/>
+    </TableRow>
+    
+    <TableRow 	   	
+        android:layout_height="wrap_content"  
+	    android:layout_width="match_parent"
+	    style="?android:attr/buttonBarStyle">
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="#eeeeee"
+            android:id="@+id/button4"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num4" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="#eeeeee"
+            android:id="@+id/button5"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num5" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="#eeeeee"
+            android:id="@+id/button6"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num6" />
+    </TableRow>
+    
+    <TableRow 	   	
+        android:layout_height="wrap_content"  
+	    android:layout_width="match_parent"
+	    style="?android:attr/buttonBarStyle">
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button7"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num7" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button8"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num8" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button9"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num9" />
+    </TableRow>
+    
+    <TableRow 	   	
+        android:layout_height="wrap_content"  
+	    android:layout_width="match_parent"
+	    style="?android:attr/buttonBarStyle">
+         <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button0"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/num0" />
+	     
+	    <Button
+	        style="?android:attr/buttonBarButtonStyle"
+	        android:id="@+id/buttonUndo"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/undo" />
+	    
+	    <Button
+	        style="?android:attr/buttonBarButtonStyle"
+	        android:id="@+id/buttonClear"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:text="@string/clear" />
+    </TableRow>
+
+
+</TableLayout>

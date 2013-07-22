@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/result_scroll"
+    android:fillViewport="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+    
+	<TableLayout 
+	   	android:id="@+id/tableLayout1" 
+	    android:layout_width="wrap_content"  
+	    android:layout_height="wrap_content"
+	    android:stretchColumns="2,3"
+	    android:shrinkColumns="2,3"
+	    android:gravity="top|center_horizontal"
+	    android:padding="16dp" >
+	    <TableRow
+	        android:id="@+id/tableRow_header"  
+	        android:layout_height="wrap_content"  
+	        android:layout_width="match_parent" >
+	        <TextView
+	            android:id="@+id/percent_header"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/percent_header"
+	            android:textSize="24sp"
+	            android:textStyle="bold" >
+	        </TextView>  
+	       	<TextView  
+	            android:id="@+id/tip_header"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp"
+	            android:text="@string/tip_header"   
+	            android:textStyle="bold" >
+	        </TextView> 
+	       	<TextView  
+	            android:id="@+id/total_header"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp"
+	            android:text="@string/total_header"
+	            android:textStyle="bold">
+	        </TextView> 
+	    </TableRow>  
+	    <TableRow
+	        android:id="@+id/tableRow1"  
+	        android:layout_height="wrap_content"  
+	        android:layout_width="match_parent" >
+	        <TextView  
+	            android:id="@+id/percent15"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp"  
+	            android:text="@string/percent15" >
+	        </TextView>  
+	       	<TextView  
+	            android:id="@+id/tip15"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp" >
+	        </TextView> 
+	       	<TextView  
+	            android:id="@+id/sum15"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp" >
+	        </TextView> 
+	    </TableRow>
+	   	<TableRow
+	        android:id="@+id/tableRow2"  
+	        android:layout_height="wrap_content"  
+	        android:layout_width="match_parent">  
+	        <TextView  
+	            android:id="@+id/percent20"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp"  
+	            android:text="@string/percent20" >
+	        </TextView>  
+	       	<TextView  
+	            android:id="@+id/tip20"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp" >
+	        </TextView> 
+	       	<TextView  
+	            android:id="@+id/sum20"  
+	            android:layout_width="wrap_content"  
+	            android:layout_height="wrap_content"   
+	            android:textSize="24sp" >
+	        </TextView> 
+	    </TableRow>
+	</TableLayout>  
+	
+</ScrollView>

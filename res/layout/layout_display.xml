@@ -14,9 +14,7 @@
         android:typeface="monospace"
         android:padding="8dp"
         android:background="#99ff99"
-        android:textAlignment="viewEnd" />
-        
+        android:gravity="right" />     
     <include layout="@layout/layout_results" />
-    
-   
+      
 </LinearLayout>

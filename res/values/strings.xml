@@ -16,6 +16,10 @@
     <string name="num0">0</string>
     <string name="clear">Clear</string>
     <string name="undo">Undo</string>
+    
+    <string name="percent_header">%</string>
+    <string name="tip_header">Tip</string>
+    <string name="total_header">Total</string>
     <string name="percent15">15%:</string>
     <string name="percent20">20%:</string>
     

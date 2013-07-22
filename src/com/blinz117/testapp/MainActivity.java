@@ -2,19 +2,19 @@ package com.blinz117.testapp;
 
 import java.math.BigDecimal;
 
+import com.blinz117.testapp.NumPadFragment.NumPadListener;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+	implements NumPadListener{
 	
 	static final String STATE_TEXT = "userValue";
 
 	TextView mTextDisplay;
-	//TextView mResultDisplay;
 	CharSequence mCurrText;
 	
 	TextView mTip15;
@@ -25,9 +25,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sandbox);
+        setContentView(R.layout.layout_main);
         
-        //mResultDisplay = (TextView)findViewById(R.id.result_display);
         mTextDisplay = (TextView)findViewById(R.id.text_display);
         
         mTip15 = (TextView)findViewById(R.id.tip15);
@@ -48,37 +47,6 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void InsertText(View view)
-    {
-    	//@TODO: When the text is too big for the screen, don't add any more text
-    	Button clicked = (Button)view;
-    	
-    	// prevent leading zeros
-    	if (mCurrText.length() == 0 && clicked.getId() == R.id.button0)
-    		return;
-    	
-    	mCurrText = mCurrText + clicked.getText().toString();
-    	mTextDisplay.setText(ConvertToDisplayText(mCurrText));
-    	UpdateResult();
-    }
-    
-    public void ClearText(View view)
-    {
-    	mCurrText = "";
-    	mTextDisplay.setText(ConvertToDisplayText(mCurrText));
-    	UpdateResult();
-    }
-    
-    public void UndoText(View view)
-    {
-    	int iEndChar = mCurrText.length()-1;
-    	if (iEndChar < 0)
-    		return;
-    	mCurrText = mCurrText.subSequence(0, iEndChar);
-    	mTextDisplay.setText(ConvertToDisplayText(mCurrText));
-    	UpdateResult();
-    }
-    
     protected CharSequence ConvertToDisplayText(CharSequence textOrig)
     {
     	CharSequence displayText = textOrig;
@@ -90,15 +58,6 @@ public class MainActivity extends Activity {
     	displayText = displayText.subSequence(0, currLength-2) + "." + displayText.subSequence(currLength-2, currLength);
     	return displayText;
     }
-    
-//    public void UpdateResult()
-//    {
-//    	double currValue = Double.parseDouble(mTextDisplay.getText().toString());
-//    	double fifteenResult = currValue * 0.15;
-//    	CharSequence result = "15%: " + round(fifteenResult,2);
-//    	result = result + " (" + (round((currValue + fifteenResult), 2)) + ")";
-//    	mResultDisplay.setText(result);
-//    }
     
     public void UpdateResult()
     {
@@ -135,5 +94,36 @@ public class MainActivity extends Activity {
         mTextDisplay.setText(ConvertToDisplayText(mCurrText));
         UpdateResult();
     }
+
+
+	@Override
+	public void OnNumberClicked(CharSequence value) {
+    	// prevent leading zeros
+    	if (mCurrText.length() == 0 && value.equals("0"))
+    		return;
+    	
+    	mCurrText = mCurrText + value.toString();
+    	mTextDisplay.setText(ConvertToDisplayText(mCurrText));
+    	UpdateResult();		
+	}
+
+
+	@Override
+	public void OnUndoButtonClicked() {
+    	int iEndChar = mCurrText.length()-1;
+    	if (iEndChar < 0)
+    		return;
+    	mCurrText = mCurrText.subSequence(0, iEndChar);
+    	mTextDisplay.setText(ConvertToDisplayText(mCurrText));
+    	UpdateResult();
+	}
+
+
+	@Override
+	public void OnClearButtonPressed() {
+    	mCurrText = "";
+    	mTextDisplay.setText(ConvertToDisplayText(mCurrText));
+    	UpdateResult();
+	}
     
 }
