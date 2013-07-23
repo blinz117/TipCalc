@@ -10,9 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:textSize="32sp"
+        android:textSize="@dimen/default_text_size"
         android:typeface="monospace"
-        android:padding="8dp"
+        android:padding="@dimen/text_display_padding"
+        android:paddingBottom="0dp"
         android:background="#99ff99"
         android:gravity="right" />     
     <include layout="@layout/layout_results" />

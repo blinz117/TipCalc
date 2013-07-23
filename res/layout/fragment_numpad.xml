@@ -6,68 +6,76 @@
     android:layout_height="match_parent" >
     
     <TableRow    	
-        android:layout_height="wrap_content"  
-	    android:layout_width="match_parent"
-	    style="?android:attr/buttonBarStyle"
-	    android:background="#aaaaaa">
-        <Button
-            style="?android:attr/buttonBarButtonStyle"
-            android:background="#dddddd"
-            android:id="@+id/button1"
-            android:layout_weight="1"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num1" />
-        <Button 
-            style="?android:attr/buttonBarButtonStyle"
-            android:background="#dddddd"
-            android:id="@+id/button2"
-            android:layout_weight="1"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num2" />
-        <Button 
-            style="?android:attr/buttonBarButtonStyle"
-            android:background="#dddddd"
-            android:id="@+id/button3"
-            android:layout_weight="1"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num3"/>
-    </TableRow>
-    
-    <TableRow 	   	
-        android:layout_height="wrap_content"  
+        android:layout_height="0dp"  
+        android:layout_weight="1"
 	    android:layout_width="match_parent"
 	    style="?android:attr/buttonBarStyle">
         <Button
             style="?android:attr/buttonBarButtonStyle"
-            android:background="#eeeeee"
-            android:id="@+id/button4"
+            android:id="@+id/button1"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num4" />
+	        android:layout_height="match_parent"
+	        android:text="@string/num1"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
         <Button 
             style="?android:attr/buttonBarButtonStyle"
-            android:background="#eeeeee"
-            android:id="@+id/button5"
+            android:id="@+id/button2"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num5" />
+	        android:layout_height="match_parent"
+	        android:text="@string/num2"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
         <Button 
             style="?android:attr/buttonBarButtonStyle"
-            android:background="#eeeeee"
-            android:id="@+id/button6"
+            android:id="@+id/button3"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num6" />
+	        android:layout_height="match_parent"
+	        android:text="@string/num3"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
     </TableRow>
     
     <TableRow 	   	
-        android:layout_height="wrap_content"  
+        android:layout_height="0dp"  
+        android:layout_weight="1" 
+	    android:layout_width="match_parent"
+	    style="?android:attr/buttonBarStyle">
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button4"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:text="@string/num4"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button5"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:text="@string/num5"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
+        <Button 
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button6"
+            android:layout_weight="1"
+	        android:layout_width="0dp"
+	        android:layout_height="match_parent"
+	        android:text="@string/num6"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
+    </TableRow>
+    
+    <TableRow 	   	
+        android:layout_height="0dp"  
+        android:layout_weight="1"  
 	    android:layout_width="match_parent"
 	    style="?android:attr/buttonBarStyle">
         <Button
@@ -75,26 +83,33 @@
             android:id="@+id/button7"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num7" />
+	        android:layout_height="match_parent"
+	        android:text="@string/num7"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
         <Button 
             style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/button8"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num8" />
+	        android:layout_height="match_parent"
+	        android:text="@string/num8"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
         <Button 
             style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/button9"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num9" />
+	        android:layout_height="match_parent"
+	        android:text="@string/num9"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
     </TableRow>
     
     <TableRow 	   	
-        android:layout_height="wrap_content"  
+        android:layout_height="0dp"  
+        android:layout_weight="1" 
 	    android:layout_width="match_parent"
 	    style="?android:attr/buttonBarStyle">
          <Button 
@@ -102,24 +117,30 @@
             android:id="@+id/button0"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/num0" />
+	        android:layout_height="match_parent"
+	        android:text="@string/num0"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
 	     
 	    <Button
 	        style="?android:attr/buttonBarButtonStyle"
 	        android:id="@+id/buttonUndo"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/undo" />
+	        android:layout_height="match_parent"
+	        android:text="@string/undo"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
 	    
 	    <Button
 	        style="?android:attr/buttonBarButtonStyle"
 	        android:id="@+id/buttonClear"
             android:layout_weight="1"
 	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:text="@string/clear" />
+	        android:layout_height="match_parent"
+	        android:text="@string/clear"
+	        android:textSize="@dimen/numpad_text_size"
+	        android:background="@drawable/numpad_button" />
     </TableRow>
 
 

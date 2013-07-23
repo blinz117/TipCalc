@@ -65,11 +65,11 @@ public class MainActivity extends Activity
     	
     	double dTip15 = currValue * 0.15;
     	mTip15.setText(round(dTip15,2).toPlainString());
-    	mSum15.setText(" (" + (round((currValue + dTip15), 2)) + ")");
+    	mSum15.setText("" + round((currValue + dTip15), 2));
     	
     	double dTip20 = currValue * 0.20;
     	mTip20.setText("" + round(dTip20,2));
-    	mSum20.setText(" (" + (round((currValue + dTip20), 2)) + ")");
+    	mSum20.setText("" + round((currValue + dTip20), 2));
     }
     
     public static BigDecimal round(double value, int places)
