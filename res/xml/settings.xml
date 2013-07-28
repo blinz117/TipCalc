@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <PreferenceCategory android:title="@string/settingsTipCategory" >
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_roundtotalkey"
+            android:title="@string/settingsRoundTitle" 
+            android:summary="@string/settingsRoundSummary">
+        </CheckBoxPreference>
+
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>
