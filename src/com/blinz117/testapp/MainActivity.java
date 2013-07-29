@@ -7,8 +7,10 @@ import com.blinz117.testapp.NumPadFragment.NumPadListener;
 import com.blinz117.testapp.TipManager;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.*;
@@ -19,6 +21,9 @@ public class MainActivity extends Activity
 	implements NumPadListener{
 	
 	static final String STATE_TEXT = "userValue";
+	
+	public static final String KEY_PREF_MIN_PERCENT = "pref_MinTipkey";
+	public static final String KEY_PREF_MAX_PERCENT = "pref_MaxTipkey";
 	
 	int minPercent = 15;
 	int maxPercent = 20;
@@ -130,6 +135,13 @@ public class MainActivity extends Activity
     {
     	double currValue = Double.parseDouble(mTextDisplay.getText().toString());
     	mTipManager.UpdateBaseAmount(currValue);
+    	
+    	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    	double newMinPercent = Double.parseDouble(sharedPref.getString(KEY_PREF_MIN_PERCENT, "10"));
+    	double newMaxPercent = Double.parseDouble(sharedPref.getString(KEY_PREF_MAX_PERCENT, "25"));
+
+    	if (newMinPercent != minPercent || newMaxPercent != maxPercent)
+    		mTipManager.UpdatePercentMinMax(newMinPercent, newMaxPercent);
 
     	UpdateResultsTable();
     }

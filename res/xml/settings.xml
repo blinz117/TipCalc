@@ -3,9 +3,29 @@
     
     <PreferenceCategory android:title="@string/settingsTipCategory" >
         
+        <ListPreference
+            android:key="pref_MinTipkey"
+            android:entries="@array/percentValues"
+            android:entryValues="@array/percentValues"
+            android:defaultValue="10"
+            android:summary="@string/settingsMinSummary"
+            android:title="@string/settingsMinTitle"
+            android:dialogTitle="@string/settingsMinTitle" >
+        </ListPreference>
+        
+        <ListPreference
+            android:key="pref_MaxTipkey"
+            android:entries="@array/percentValues"
+            android:entryValues="@array/percentValues"
+            android:defaultValue="25"
+            android:summary="@string/settingsMaxSummary"
+            android:title="@string/settingsMaxTitle"
+            android:dialogTitle="@string/settingsMaxTitle" >
+        </ListPreference>
+        
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="pref_roundtotalkey"
+            android:key="pref_RoundTotalkey"
             android:title="@string/settingsRoundTitle" 
             android:summary="@string/settingsRoundSummary">
         </CheckBoxPreference>

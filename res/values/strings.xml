@@ -28,5 +28,10 @@
     <string name="settingsRoundTitle">Show round totals</string>
     <string name="settingsRoundSummary">Show tips result in a round dollar total amount</string>
     
+    <string name="settingsMinTitle">Minimum Tip</string>
+    <string name="settingsMinSummary">The minimum percentage value to show.</string>
+    
+    <string name="settingsMaxTitle">Maximum Tip</string>
+    <string name="settingsMaxSummary">The maximum percentage value to show.</string>
 
 </resources>
