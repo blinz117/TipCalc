@@ -24,6 +24,7 @@ public class MainActivity extends Activity
 	
 	public static final String KEY_PREF_MIN_PERCENT = "pref_MinTipkey";
 	public static final String KEY_PREF_MAX_PERCENT = "pref_MaxTipkey";
+	public static final String KEY_PREF_ROUND_TOTALS = "pref_RoundTotalkey";
 	
 	int minPercent = 15;
 	int maxPercent = 20;
@@ -139,9 +140,15 @@ public class MainActivity extends Activity
     	SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
     	double newMinPercent = Double.parseDouble(sharedPref.getString(KEY_PREF_MIN_PERCENT, "10"));
     	double newMaxPercent = Double.parseDouble(sharedPref.getString(KEY_PREF_MAX_PERCENT, "25"));
+    	
+    	boolean bShowRound = sharedPref.getBoolean(KEY_PREF_ROUND_TOTALS, false);
+    	
+    	mTipManager.UpdateRoundTips(bShowRound);
 
     	if (newMinPercent != minPercent || newMaxPercent != maxPercent)
     		mTipManager.UpdatePercentMinMax(newMinPercent, newMaxPercent);
+    	
+    	mTipManager.CalculateTips();
 
     	UpdateResultsTable();
     }

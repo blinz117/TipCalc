@@ -26,7 +26,7 @@
     <string name="settingsTipCategory">Tip Settings</string>
     
     <string name="settingsRoundTitle">Show round totals</string>
-    <string name="settingsRoundSummary">Show tips result in a round dollar total amount</string>
+    <string name="settingsRoundSummary">Show tips result in a round dollar total amount. \nNOTE: This may cause performance issues for large amounts or wide percent ranges.</string>
     
     <string name="settingsMinTitle">Minimum Tip</string>
     <string name="settingsMinSummary">The minimum percentage value to show.</string>
