@@ -5,8 +5,6 @@ import java.util.Vector;
 
 public class TipManager {
 	
-	static final BigDecimal ONE_HUNDRED = round(100.0, 2);
-	
 	double mMinPercent;
 	double mMaxPercent;
 	double mBaseAmount;
@@ -54,7 +52,7 @@ public class TipManager {
 			 mTotals.add(round(currTotal, 2));
 		}
 		
-		if (!bMinMaxEqual)
+		if (!bMinMaxEqual && mRoundTips)
 		{
 			// the min total will be the first element in the totals array and max will be second
 			BigDecimal minTotal = mTotals.get(0);
@@ -66,8 +64,8 @@ public class TipManager {
 				BigDecimal roundAmount = nextDollar.setScale(2);
 				// calculate tip and percentage
 				BigDecimal newTipAmount = roundAmount.subtract(round(mBaseAmount,2));
-				BigDecimal newPercent = newTipAmount.multiply(ONE_HUNDRED);
-				newPercent = newPercent.divide(roundAmount, 1, BigDecimal.ROUND_HALF_UP);
+				double dPercent = newTipAmount.doubleValue() * 100.0 / mBaseAmount;
+				BigDecimal newPercent = round(dPercent, 1);
 				
 				mTipPercentages.add(newPercent);
 				mTipAmounts.add(newTipAmount);
@@ -81,7 +79,6 @@ public class TipManager {
 	public void UpdateBaseAmount(double newBaseAmount)
 	{
 		mBaseAmount = newBaseAmount;
-		//CalculateTips();
 	}
 	
 	public void UpdatePercentMinMax(double newMin, double newMax)
@@ -93,7 +90,6 @@ public class TipManager {
 		mMaxPercent = Math.max(newMin, newMax);
 //		mMinPercent = newMin;
 //		mMaxPercent = newMax;
-		//CalculateTips();
 	}
 	
 	public void UpdateRoundTips(boolean bUseRoundTips)
