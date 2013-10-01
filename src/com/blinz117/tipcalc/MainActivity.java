@@ -1,11 +1,12 @@
-package com.blinz117.testapp;
+package com.blinz117.tipcalc;
 
 import java.math.BigDecimal;
 import java.util.Vector;
 
-import com.blinz117.testapp.NumPadFragment.NumPadListener;
-import com.blinz117.testapp.TipManager;
+import com.blinz117.tipcalc.TipManager;
+import com.blinz117.tipcalc.NumPadFragment.NumPadListener;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
@@ -151,6 +152,19 @@ public class MainActivity extends Activity
     	mTipManager.CalculateTips();
 
     	UpdateResultsTable();
+    }
+    
+    private class GetTipsTask extends AsyncTask<Void, Void, Void>{
+    	protected Void doInBackground(Void...voids)
+    	{
+    		mTipManager.CalculateTips();
+			return null;
+    	}
+    	
+    	protected void onPostExecute()
+    	{
+    		UpdateResultsTable();
+    	}
     }
 	
 	public void UpdateResultsTable()

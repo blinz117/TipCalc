@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         layout="@layout/layout_display"/>
 
-    <fragment android:name="com.blinz117.testapp.NumPadFragment"
+    <fragment android:name="com.blinz117.tipcalc.NumPadFragment"
         android:id="@+id/NumPad"
         android:layout_weight="1"
         android:layout_width="0dp"

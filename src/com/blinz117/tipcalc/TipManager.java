@@ -1,4 +1,4 @@
-package com.blinz117.testapp;
+package com.blinz117.tipcalc;
 
 import java.math.BigDecimal;
 import java.util.Vector;

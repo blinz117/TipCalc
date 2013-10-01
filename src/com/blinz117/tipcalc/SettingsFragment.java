@@ -1,4 +1,4 @@
-package com.blinz117.testapp;
+package com.blinz117.tipcalc;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

@@ -1,4 +1,4 @@
-package com.blinz117.testapp;
+package com.blinz117.tipcalc;
 
 import android.app.Activity;
 import android.app.Fragment;
