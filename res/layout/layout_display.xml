@@ -15,7 +15,16 @@
         android:padding="@dimen/text_display_padding"
         android:paddingBottom="0dp"
         android:background="#99ff99"
-        android:gravity="right" />     
+        android:gravity="right" />
+
+    <ProgressBar
+        android:id="@+id/loadingView"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+     
     <include layout="@layout/layout_results" />
       
 </LinearLayout>

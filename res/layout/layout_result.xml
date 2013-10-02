@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/text_display_padding" >
+
+    <TableRow
+        android:id="@+id/tipRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/percentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/percent15"
+            android:textSize="@dimen/default_text_size" />
+
+        <TextView
+            android:id="@+id/tipAmountText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:maxLines="1"
+            android:textSize="@dimen/default_text_size"
+            android:typeface="monospace" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#111111" >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/totalRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/total_header"
+            android:textSize="@dimen/default_text_size" />
+
+        <TextView
+            android:id="@+id/totalText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:maxLines="1"
+            android:textSize="@dimen/default_text_size"
+            android:typeface="monospace" >
+        </TextView>
+    </TableRow>
+
+</TableLayout>

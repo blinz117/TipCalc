@@ -1,15 +1,19 @@
 package com.blinz117.tipcalc;
 
 import java.math.BigDecimal;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import com.blinz117.tipcalc.TipManager;
 import com.blinz117.tipcalc.NumPadFragment.NumPadListener;
+import com.blinz117.tipcalc.TipManager.TipCalculationListener;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -19,7 +23,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
 
 public class MainActivity extends Activity
-	implements NumPadListener{
+	implements NumPadListener, TipCalculationListener{
 	
 	static final String STATE_TEXT = "userValue";
 	
@@ -31,19 +35,32 @@ public class MainActivity extends Activity
 	int maxPercent = 20;
 	
 	TipManager mTipManager;
+	
+	List<Tip> mTipList;
+	ListView mResultList;
+	TipAdapter mTipAdapter;
 
-	LinearLayout mResultsView;
+	//LinearLayout mResultsView;
 	TextView mTextDisplay;
 	CharSequence mCurrText;
+	
+	ProgressBar mLoadingView;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
         
-        mTipManager = new TipManager(minPercent, maxPercent);
+        mLoadingView = (ProgressBar)findViewById(R.id.loadingView);
         
-        mResultsView = (LinearLayout)findViewById(R.id.tableHolder);
+        mTipManager = new TipManager(this, minPercent, maxPercent);
+        
+        mTipList = new ArrayList<Tip>();
+        
+        mResultList = (ListView)findViewById(R.id.result_list);
+        mTipAdapter = new TipAdapter(this, R.layout.layout_result, mTipList);
+        mResultList.setAdapter(mTipAdapter);
+       // mResultsView = (LinearLayout)findViewById(R.id.tableHolder);
         mTextDisplay = (TextView)findViewById(R.id.text_display);
         
         mCurrText = "";
@@ -135,6 +152,10 @@ public class MainActivity extends Activity
 	
     public void UpdateResult()
     {
+    	mTipList.clear();
+    	mTipAdapter.notifyDataSetChanged();
+    	//mResultsView.removeViews(0, mResultsView.getChildCount());
+    	
     	double currValue = Double.parseDouble(mTextDisplay.getText().toString());
     	mTipManager.UpdateBaseAmount(currValue);
     	
@@ -151,31 +172,19 @@ public class MainActivity extends Activity
     	
     	mTipManager.CalculateTips();
 
-    	UpdateResultsTable();
-    }
-    
-    private class GetTipsTask extends AsyncTask<Void, Void, Void>{
-    	protected Void doInBackground(Void...voids)
-    	{
-    		mTipManager.CalculateTips();
-			return null;
-    	}
-    	
-    	protected void onPostExecute()
-    	{
-    		UpdateResultsTable();
-    	}
+    	//UpdateResultsTable();
     }
 	
 	public void UpdateResultsTable()
 	{
+		/*
 		//Clear the children of the scroll view
 		mResultsView.removeViews(0, mResultsView.getChildCount());
 		
 		// Now generate the new layouts
-		Vector<BigDecimal> percents = mTipManager.GetPercentages();
-		Vector<BigDecimal> tips = mTipManager.GetTips();
-		Vector<BigDecimal> totals = mTipManager.GetTotals();
+		ArrayList<BigDecimal> percents = mTipManager.GetPercentages();
+		ArrayList<BigDecimal> tips = mTipManager.GetTips();
+		ArrayList<BigDecimal> totals = mTipManager.GetTotals();
 		int numItems = percents.size();
 		for (int ndx = 0; ndx<numItems; ndx++)
 		{
@@ -188,168 +197,81 @@ public class MainActivity extends Activity
 			resultSpace.setLayoutParams(spaceParams);
 			mResultsView.addView(resultSpace);
 		}
+		*/
 	}
 	
-	private View GenerateTipLayout(BigDecimal tipPercent, BigDecimal tipAmount, BigDecimal tipTotal)
+	@Override
+	public void preTipCalculation()
 	{
-		
-		/*
-		 * Emulate this layout:
-		 * 
-		 <TableLayout
-	    android:id="@+id/tableLayout1"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:padding="@dimen/text_display_padding" >
-	    
-	    <TableRow
-	        android:id="@+id/tableRow15"  
-	        android:layout_height="wrap_content"  
-	        android:layout_width="match_parent">  
-	        <TextView  
-	            android:id="@+id/percent15"  
-	            android:layout_width="wrap_content"  
-	            android:layout_height="wrap_content"   
-	            android:textSize="@dimen/default_text_size"  
-	            android:text="@string/percent15" />
-	       	<TextView  
-	            android:id="@+id/tip15"  
-	            android:layout_width="0dp"
-	            android:layout_weight="1"  
-	            android:layout_height="wrap_content"
-	            android:maxLines="1"   
-	            android:textSize="@dimen/default_text_size"
-	            android:typeface="monospace"
-	            android:gravity="right" />
-	    </TableRow>
-
-	    <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#111111" >
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="1dp" />
-        </TableRow>
-
-        <TableRow
-	        android:layout_height="wrap_content"  
-	        android:layout_width="match_parent">  
-	        <TextView
-	            android:text="@string/total_header"
-	            android:textSize="@dimen/default_text_size"
-	            android:layout_width="wrap_content"/>
-	       	<TextView  
-	            android:id="@+id/sum15"  
-	            android:layout_width="0dp"
-	            android:layout_weight="1"  
-	            android:layout_height="wrap_content"
-	            android:maxLines="1"    
-	            android:textSize="@dimen/default_text_size"
-	            android:typeface="monospace"
-	            android:gravity="right" >
-	        </TextView> 
-	    </TableRow>   
-		 */
-		int iMatchParent = LayoutParams.MATCH_PARENT;
-		int iWrapContent = LayoutParams.WRAP_CONTENT;
-		LayoutParams regularParams = new LayoutParams(iMatchParent, iWrapContent);
-		TableRow.LayoutParams promptItemParams = new TableRow.LayoutParams(iWrapContent, iWrapContent);
-		TableRow.LayoutParams valueItemParams = new TableRow.LayoutParams(0, iWrapContent, 1.0f);
-		
-		/*
-		 * Create new table
-		 */
-		TableLayout tipLayout = new TableLayout(this);
-		tipLayout.setLayoutParams(regularParams);
-		
-		/*
-		 *  Tip row
-		 */
-		TableRow tipRow = new TableRow(this);
-		tipRow.setLayoutParams(regularParams);
-		/*
-	    <TextView  
-	      android:id="@+id/percent15"  
-	      android:layout_width="wrap_content"  
-	      android:layout_height="wrap_content"   
-	      android:textSize="@dimen/default_text_size"  
-	      android:text="@string/percent15" />
-		 */
-		TextView percentText = new TextView(this);
-		percentText.setLayoutParams(promptItemParams);
-		percentText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_text_size));
-		percentText.setText("(" + tipPercent + "%)");
-		
-		/*
-	   	<TextView  
-	      android:id="@+id/tip15"  
-	      android:layout_width="0dp"
-	      android:layout_weight="1"  
-	      android:layout_height="wrap_content"
-	      android:maxLines="1"   
-	      android:textSize="@dimen/default_text_size"
-	      android:typeface="monospace"
-	      android:gravity="right" />
-		 */
-		TextView tipText = new TextView(this);
-		tipText.setLayoutParams(valueItemParams);
-		tipText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_text_size));
-		tipText.setText("" + tipAmount);
-		tipText.setGravity(Gravity.RIGHT);
-		tipText.setMaxLines(1);
-		tipText.setTypeface(Typeface.MONOSPACE);
-		
-		// Add values to tip row
-		tipRow.addView(percentText);
-		tipRow.addView(tipText);
-		
-		/*
-		 *  Black line between tip and total
-		 */
-		TableRow lineRow = new TableRow(this);
-		lineRow.setLayoutParams(regularParams);
-		lineRow.setBackgroundColor(0xff111111);
-		
-		Space lineSpace = new Space(this);
-		TableRow.LayoutParams spaceParams = new TableRow.LayoutParams(iMatchParent, getResources().getDimensionPixelSize(R.dimen.line_thickness));
-		lineSpace.setLayoutParams(spaceParams);
-		
-		lineRow.addView(lineSpace);
-		
-		/*
-		 *  Total row
-		 */
-		TableRow totalRow = new TableRow(this);
-		totalRow.setLayoutParams(regularParams);
-
-		// Total header
-		TextView totalHeader = new TextView(this);
-		totalHeader.setLayoutParams(promptItemParams);
-		totalHeader.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_text_size));
-		totalHeader.setText(R.string.total_header);
-		
-		// Total value
-		TextView totalText = new TextView(this);
-		totalText.setLayoutParams(valueItemParams);
-		totalText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_text_size));
-		totalText.setText(tipTotal.toPlainString());
-		totalText.setGravity(Gravity.RIGHT);
-		totalText.setMaxLines(1);
-		totalText.setTypeface(Typeface.MONOSPACE);
-		
-		// add values to total row
-		totalRow.addView(totalHeader);
-		totalRow.addView(totalText);
-		
-		/*
-		 * Finally, add the rows to the table
-		 */
-		tipLayout.addView(tipRow);
-		tipLayout.addView(lineRow);
-		tipLayout.addView(totalRow);
-		
-		return tipLayout;
+		// TODO: Add some kind of loading indicator here
+		mLoadingView.setVisibility(View.VISIBLE);
 	}
-    
+	
+	@Override
+	public void onTipCalculation(/*BigDecimal percent, BigDecimal amount, BigDecimal total*/) {
+		// TODO Auto-generated method stub
+		mLoadingView.setVisibility(View.GONE);
+		
+		mTipList.addAll(mTipManager.mTips);
+		//mTipList.add(new Tip(percent, amount, total));
+		mTipAdapter.notifyDataSetChanged();
+	}
+	
+	
+	public class TipAdapter extends ArrayAdapter<Tip> {
+
+		public TipAdapter(Context context, int textViewResourceId) {
+		    super(context, textViewResourceId);
+		    // TODO Auto-generated constructor stub
+		}
+
+		private List<Tip> items;
+
+		public TipAdapter(Context context, int resource, List<Tip> items) {
+
+		    super(context, resource, items);
+
+		    this.items = items;
+
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+
+		    View v = convertView;
+
+		    if (v == null) {
+
+		        LayoutInflater vi;
+		        vi = LayoutInflater.from(getContext());
+		        v = vi.inflate(R.layout.layout_result, null);
+
+		    }
+
+		    Tip p = items.get(position);
+
+		    if (p != null) {
+
+		        TextView percentText = (TextView) v.findViewById(R.id.percentText);
+		        TextView tipAmountText = (TextView) v.findViewById(R.id.tipAmountText);
+		        TextView totalText = (TextView) v.findViewById(R.id.totalText);
+
+		        if (percentText != null) {
+		        	percentText.setText(p.getPercent().toPlainString());
+		        }
+		        if (tipAmountText != null) {
+
+		        	tipAmountText.setText(p.getAmount().toPlainString());
+		        }
+		        if (totalText != null) {
+
+		        	totalText.setText(p.getTotal().toPlainString());
+		        }
+		    }
+
+		    return v;
+
+		}
+		
+	}
 }
