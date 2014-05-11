@@ -1,6 +1,5 @@
 package com.blinz117.tipcalc;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +8,13 @@ import com.blinz117.tipcalc.TipManager;
 import com.blinz117.tipcalc.NumPadFragment.NumPadListener;
 import com.blinz117.tipcalc.TipManager.TipCalculationListener;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
-import android.util.TypedValue;
 import android.view.*;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.*;
 
 public class MainActivity extends Activity
@@ -40,7 +35,6 @@ public class MainActivity extends Activity
 	ListView mResultList;
 	TipAdapter mTipAdapter;
 
-	//LinearLayout mResultsView;
 	TextView mTextDisplay;
 	CharSequence mCurrText;
 	
@@ -60,7 +54,7 @@ public class MainActivity extends Activity
         mResultList = (ListView)findViewById(R.id.result_list);
         mTipAdapter = new TipAdapter(this, R.layout.layout_result, mTipList);
         mResultList.setAdapter(mTipAdapter);
-       // mResultsView = (LinearLayout)findViewById(R.id.tableHolder);
+
         mTextDisplay = (TextView)findViewById(R.id.text_display);
         
         mCurrText = "";
@@ -71,7 +65,6 @@ public class MainActivity extends Activity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -154,7 +147,6 @@ public class MainActivity extends Activity
     {
     	mTipList.clear();
     	mTipAdapter.notifyDataSetChanged();
-    	//mResultsView.removeViews(0, mResultsView.getChildCount());
     	
     	double currValue = Double.parseDouble(mTextDisplay.getText().toString());
     	mTipManager.UpdateBaseAmount(currValue);
@@ -171,49 +163,20 @@ public class MainActivity extends Activity
     		mTipManager.UpdatePercentMinMax(newMinPercent, newMaxPercent);
     	
     	mTipManager.CalculateTips();
-
-    	//UpdateResultsTable();
     }
-	
-	public void UpdateResultsTable()
-	{
-		/*
-		//Clear the children of the scroll view
-		mResultsView.removeViews(0, mResultsView.getChildCount());
-		
-		// Now generate the new layouts
-		ArrayList<BigDecimal> percents = mTipManager.GetPercentages();
-		ArrayList<BigDecimal> tips = mTipManager.GetTips();
-		ArrayList<BigDecimal> totals = mTipManager.GetTotals();
-		int numItems = percents.size();
-		for (int ndx = 0; ndx<numItems; ndx++)
-		{
-			View newTable = GenerateTipLayout(percents.get(ndx), tips.get(ndx), totals.get(ndx));
-			mResultsView.addView(newTable);
-			
-			// Add space after each result
-			Space resultSpace = new Space(this);
-			LinearLayout.LayoutParams spaceParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, (int)getResources().getDimension(R.dimen.result_space));
-			resultSpace.setLayoutParams(spaceParams);
-			mResultsView.addView(resultSpace);
-		}
-		*/
-	}
 	
 	@Override
 	public void preTipCalculation()
 	{
-		// TODO: Add some kind of loading indicator here
 		mLoadingView.setVisibility(View.VISIBLE);
 	}
 	
 	@Override
-	public void onTipCalculation(/*BigDecimal percent, BigDecimal amount, BigDecimal total*/) {
-		// TODO Auto-generated method stub
+	public void onTipCalculation() {
 		mLoadingView.setVisibility(View.GONE);
 		
 		mTipList.addAll(mTipManager.mTips);
-		//mTipList.add(new Tip(percent, amount, total));
+
 		mTipAdapter.notifyDataSetChanged();
 	}
 	
@@ -222,7 +185,6 @@ public class MainActivity extends Activity
 
 		public TipAdapter(Context context, int textViewResourceId) {
 		    super(context, textViewResourceId);
-		    // TODO Auto-generated constructor stub
 		}
 
 		private List<Tip> items;
@@ -257,7 +219,7 @@ public class MainActivity extends Activity
 		        TextView totalText = (TextView) v.findViewById(R.id.totalText);
 
 		        if (percentText != null) {
-		        	percentText.setText(p.getPercent().toPlainString());
+		        	percentText.setText(p.getPercent().toPlainString() + "%");
 		        }
 		        if (tipAmountText != null) {
 

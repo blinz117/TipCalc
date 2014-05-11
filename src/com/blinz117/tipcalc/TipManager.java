@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.blinz117.tipcalc.NumPadFragment.NumPadListener;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 
@@ -29,7 +27,7 @@ public class TipManager {
 	
 	public interface TipCalculationListener{
 		
-		public void onTipCalculation(/*BigDecimal percent, BigDecimal amount, BigDecimal total*/);
+		public void onTipCalculation();
 		public void preTipCalculation();
 	}
 	
@@ -57,7 +55,6 @@ public class TipManager {
 			total = round(currTotal, 2);
 			
 			mTips.add(new Tip(percent, amount, total));
-			//publishProgress(percent, amount, total);
 			
 			minTotal = total;
 			
@@ -70,9 +67,7 @@ public class TipManager {
 				currTotal = baseAmount + currTip;
 				total = round(currTotal, 2);
 				
-				mTips.add(new Tip(percent, amount, total));
-				//publishProgress(percent, amount, total);
-		
+				mTips.add(new Tip(percent, amount, total));		
 			}
 			
 			maxTotal = total;
@@ -90,17 +85,11 @@ public class TipManager {
 					BigDecimal newPercent = round(dPercent, 1);
 					
 					mTips.add(new Tip(newPercent, newTipAmount, roundAmount));
-					//publishProgress(newPercent, newTipAmount, roundAmount);
 					
 					nextDollar = roundAmount.add(BigDecimal.ONE);
 				}
 			}
 			return null;
-		}
-		
-		protected void onProgressUpdate(/*BigDecimal... progress*/)
-		{
-			//mTipListener.onTipCalculation(progress[0], progress[1], progress[2]);
 		}
 		
 		protected void onPreExecute()
@@ -147,50 +136,6 @@ public class TipManager {
 		
 		calcThread = new CalculateTipsTask();
 		calcThread.execute(mBaseAmount, mMinPercent, mMaxPercent);
-		/*
-		mTipPercentages.clear();
-		mTipAmounts.clear();
-		mTotals.clear();
-		
-		boolean bMinMaxEqual = (mMaxPercent == mMinPercent);
-		
-		mTipPercentages.add(round(mMinPercent, 1));
-		// don't add same value twice
-		if (!bMinMaxEqual)
-			mTipPercentages.add(round(mMaxPercent, 1));
-		
-		for (int ndx = 0; ndx < mTipPercentages.size(); ndx++)
-		{
-			 double currTip = mTipPercentages.get(ndx).doubleValue()/100.0 * mBaseAmount;
-			 mTipAmounts.add(round(currTip, 2));
-			 
-			 double currTotal = mBaseAmount + currTip;
-			 mTotals.add(round(currTotal, 2));
-		}
-		
-		if (!bMinMaxEqual && mRoundTips)
-		{
-			// the min total will be the first element in the totals array and max will be second
-			BigDecimal minTotal = mTotals.get(0);
-			BigDecimal maxTotal = mTotals.get(1);
-			BigDecimal nextDollar = minTotal.setScale(0, BigDecimal.ROUND_DOWN).add(BigDecimal.ONE);
-			
-			while (maxTotal.compareTo(nextDollar) > 0)
-			{
-				BigDecimal roundAmount = nextDollar.setScale(2);
-				// calculate tip and percentage
-				BigDecimal newTipAmount = roundAmount.subtract(round(mBaseAmount,2));
-				double dPercent = newTipAmount.doubleValue() * 100.0 / mBaseAmount;
-				BigDecimal newPercent = round(dPercent, 1);
-				
-				mTipPercentages.add(newPercent);
-				mTipAmounts.add(newTipAmount);
-				mTotals.add(roundAmount);
-				
-				nextDollar = roundAmount.add(BigDecimal.ONE);
-			}
-		}
-		*/
 	}
 	
 	public void stopCalculating()
@@ -214,8 +159,6 @@ public class TipManager {
 		// validation on the values right now
 		mMinPercent = Math.min(newMin, newMax);
 		mMaxPercent = Math.max(newMin, newMax);
-//		mMinPercent = newMin;
-//		mMaxPercent = newMax;
 	}
 	
 	public void UpdateRoundTips(boolean bUseRoundTips)
